@@ -1,13 +1,5 @@
-﻿using System.Text;
+﻿using MoneyBook.UI.ViewModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MoneyBook.UI
 {
@@ -16,9 +8,21 @@ namespace MoneyBook.UI
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private MainViewModel viewModel_;
+
+        public MainWindow(MainViewModel viewModel)
         {
             InitializeComponent();
+
+            viewModel_ = viewModel;
+            DataContext = viewModel_;
+
+            Loaded += MainWindow_Loaded;
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            viewModel_.Load();
         }
     }
 }
